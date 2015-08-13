@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Tag.iml" filepath="$PROJECT_DIR$/Tag.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FindMyTag.iml" filepath="$PROJECT_DIR$/FindMyTag.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
