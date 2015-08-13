@@ -1,6 +1,8 @@
 package com.example.rohantiwari.tag;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -16,7 +18,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,6 +30,9 @@ public class SignUp extends Activity implements View.OnClickListener{
     EditText name,password,email,password2;
     Button signup;
     private String mname,mpassword,memail;
+    private String result = "";
+    public JSONObject json;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,48 +44,33 @@ public class SignUp extends Activity implements View.OnClickListener{
         signup=(Button)findViewById(R.id.btnCreate_acc);
         signup.setOnClickListener(this);
     }
-    public static String POST(String url, String name, String password, String email ){
+    public String POST(String url, String name, String password, String email ){
         InputStream inputStream = null;
-        String result = "";
         try {
 
-            // 1. create HttpClient
             HttpClient httpclient = new DefaultHttpClient();
 
-            // 2. make POST request to the given URL
             HttpPost httpPost = new HttpPost(url);
 
             String json = "";
 
-            // 3. build jsonObject
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("username",name);
             jsonObject.put("password", password);
             jsonObject.put("email", email);
             Log.d("json obj", String.valueOf(jsonObject));
-            // 4. convert JSONObject to JSON to String
             json = jsonObject.toString();
 
-            // ** Alternative way to convert Person object to JSON string usin Jackson Lib
-            // ObjectMapper mapper = new ObjectMapper();
-            // json = mapper.writeValueAsString(person);
-
-            // 5. set json to StringEntity
             StringEntity se = new StringEntity(json);
 
-            // 6. set httpPost Entity
             httpPost.setEntity(se);
 
-            // 7. Set some headers to inform server about the type of the content
             httpPost.setHeader("Content-type", "application/json");
 
-            // 8. Execute POST request to the given URL
             HttpResponse httpResponse = httpclient.execute(httpPost);
 
-            // 9. receive response as inputStream
             inputStream = httpResponse.getEntity().getContent();
 
-            // 10. convert inputstream to string
             if(inputStream != null)
                 result = convertInputStreamToString(inputStream);
             else
@@ -113,6 +105,13 @@ public class SignUp extends Activity implements View.OnClickListener{
 
     }
     private class HttpAsyncTask extends AsyncTask<String, Void, String> {
+        ProgressDialog dialog = new ProgressDialog(SignUp.this);
+
+        protected void onPreExecute() {
+            // Show Progress dialog
+            dialog.setMessage("Registering..");
+            dialog.show();
+        }
         @Override
         protected String doInBackground(String... urls) {
 
@@ -125,7 +124,31 @@ public class SignUp extends Activity implements View.OnClickListener{
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(getBaseContext(), "Data Sent!", Toast.LENGTH_LONG).show();
+            dialog.dismiss();
+            Toast.makeText(getBaseContext(), "Check Email", Toast.LENGTH_LONG).show();
+            try {
+                json = new JSONObject(result);
+                Log.d("Data recieved from server", String.valueOf(json));
+//                JSONObject json_LL = json.getJSONObject("LL");
+//                success_login=json.getString("success");
+//                Log.d("success value",success_login);
+//                Log.d("HTTP", "HTTP: OK");
+//                Log.d("token received",result);
+               Intent i = new Intent(getApplicationContext(), User_page.class);
+                startActivity(i);
+                finish();
+//                }
+//                else
+//                {
+//                    Toast.makeText(getApplicationContext(),"Authentication error",Toast.LENGTH_SHORT).show();
+//
+//                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
         }
     }
 
