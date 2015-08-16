@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.rohantiwari.tag.Device_Menu"
+    android:weightSum="1">
+
+
+    <ImageView
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:id="@+id/device_image_menu"
+        android:src="@drawable/defalut"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+    <Button
+        android:id="@+id/find_device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find Device"
+        android:layout_gravity="center_vertical"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/last_location"
+        android:layout_alignEnd="@+id/last_location"
+        android:background="@drawable/roundcorner"/>
+    <Button
+        android:id="@+id/protected_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Protected Mode"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/roundcorner"
+        android:layout_below="@+id/last_location"
+        android:layout_alignStart="@+id/last_location"
+        android:layout_marginTop="29dp"
+        android:layout_alignEnd="@+id/last_location" />
+    <Button
+        android:id="@+id/last_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Location"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/roundcorner"
+        android:layout_below="@+id/find_device"
+        android:layout_alignStart="@+id/device_image_menu"
+        android:layout_marginTop="27dp"
+        android:layout_alignEnd="@+id/device_image_menu" />
+</RelativeLayout>

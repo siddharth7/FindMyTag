@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.rohantiwari.tag" >
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <uses-permission android:name="android.permission.INTERNET" />
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        android:theme="@style/AppThemeMainActivity" >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -27,11 +34,20 @@
         <activity
             android:name=".Login"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppThemeSignUp">
+            android:theme="@style/AppThemeSignUp" >
         </activity>
         <activity
             android:name=".User_page"
-            android:label="UserPage">
+            android:label="UserPage" >
+        </activity>
+        <activity
+            android:name=".DeviceScanActivity"
+            android:label="ScanDevice"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".Device_Menu"
+            android:label="@string/title_activity_device__menu" >
         </activity>
     </application>
 

@@ -81,7 +81,7 @@ public class SignUp extends Activity implements View.OnClickListener{
         }
 
         // 11. return result
-        Log.d("final result",result);
+        Log.d("final result", result);
         return result;
     }
 
@@ -98,8 +98,10 @@ public class SignUp extends Activity implements View.OnClickListener{
 
         switch(view.getId()){
             case R.id.btnCreate_acc:
-                // call AsynTask to perform network operation on separate thread
-                new HttpAsyncTask().execute("http://192.168.56.74:8000/users/");
+                if(validate()) {
+                    // call AsynTask to perform network operation on separate thread
+                    new HttpAsyncTask().execute("http://192.168.56.74:8000/users/");
+                }
                 break;
         }
 
@@ -163,5 +165,42 @@ public class SignUp extends Activity implements View.OnClickListener{
         inputStream.close();
         return result;
 
+    }
+    public boolean validate() {
+        boolean valid = true;
+
+        String checkname = name.getText().toString();
+        String checkemail =  email.getText().toString();
+        String checkpassword = password.getText().toString();
+        String confirmpassword = password2.getText().toString();
+
+        if (checkname.isEmpty() || name.length() < 3) {
+            name.setError("at least 3 characters");
+            valid = false;
+        } else {
+            name.setError(null);
+        }
+        if (checkemail.isEmpty(
+
+        ) || !android.util.Patterns.EMAIL_ADDRESS.matcher(checkemail).matches()) {
+            email.setError("enter a valid email address");
+            valid = false;
+        } else {
+            email.setError(null);
+        }
+
+        if (checkpassword.isEmpty() || checkpassword.length() < 4) {
+            password.setError("greater than 4 alphanumeric characters");
+            valid = false;
+        } else {
+            password.setError(null);
+        }
+        if(checkpassword.equals(confirmpassword)){
+            password.setError("Password Donot Match");
+            valid  = false;
+        }else {
+            password.setError(null);
+        }
+        return valid;
     }
 }
