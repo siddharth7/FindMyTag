@@ -13,11 +13,18 @@ android:layout_marginBottom="16dp">
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/country_name"
+        android:id="@+id/object_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
-        android:text="@string/country_name"
+        android:text="@string/object_name"
+        android:textColor="@color/Accent" />
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:text="@string/object_name"
         android:textColor="@color/Accent"
         android:textStyle="bold" />
 
@@ -26,8 +33,9 @@ android:layout_marginBottom="16dp">
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:contentDescription="@string/action_settings"
-        android:layout_alignLeft="@id/country_name"
-        android:src="@drawable/defalut"/>
+        android:src="@drawable/defalut"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
 

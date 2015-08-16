@@ -7,7 +7,7 @@
     <string name="action_refresh">Settings</string>
     <string name="action_new">Settings</string>
     <string name="logo_desc">App logo</string>
-    <string name="country_name">Nigeria</string>
+    <string name="object_name">Device</string>
     <string name="unknown_device">Unknown device</string>
     <string name="menu_connect">Connect</string>
     <string name="menu_disconnect">Disconnect</string>

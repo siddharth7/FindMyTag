@@ -10,14 +10,16 @@ import android.widget.Toast;
 
 public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-    public TextView countryName;
-    public ImageView countryPhoto;
+    public TextView objectName;
+    public ImageView objectPhoto;
+    public TextView objectAddress;
 
     public RecyclerViewHolders(View itemView) {
         super(itemView);
         itemView.setOnClickListener(this);
-        countryName = (TextView)itemView.findViewById(R.id.country_name);
-        countryPhoto = (ImageView)itemView.findViewById(R.id.device_photo);
+        objectName = (TextView)itemView.findViewById(R.id.item_name);
+        objectPhoto = (ImageView)itemView.findViewById(R.id.device_photo);
+        objectAddress = (TextView)itemView.findViewById(R.id.object_address);
     }
 
     @Override
