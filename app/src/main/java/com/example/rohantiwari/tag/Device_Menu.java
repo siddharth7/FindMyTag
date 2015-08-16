@@ -1,6 +1,7 @@
 package com.example.rohantiwari.tag;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -15,10 +16,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
-public class Device_Menu extends Activity {
+public class Device_Menu extends Activity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,5 +48,15 @@ public class Device_Menu extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId()== R.id.find_device){
+            Toast.makeText(getApplicationContext(), "Authentication error", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(getApplicationContext(), User_page.class);
+            startActivity(i);
+        }
+
     }
 }

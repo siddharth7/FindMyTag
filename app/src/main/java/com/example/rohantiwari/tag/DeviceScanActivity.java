@@ -31,6 +31,7 @@ public class DeviceScanActivity extends ListActivity {
     private BluetoothAdapter mBluetoothAdapter;
     private boolean mScanning;
     private Handler mHandler;
+    private String DeviceAddress;
 
     private static final String TAG = "DeviceScanActivity";
     private static final int REQUEST_ENABLE_BT = 1;
@@ -134,6 +135,10 @@ public class DeviceScanActivity extends ListActivity {
         final BluetoothDevice device = mLeDeviceListAdapter.getDevice(position);
         if (device == null) return;
         //Add code to send data to server
+        //Add  these variable to server
+        DeviceAddress = device.getAddress();
+
+
         if (mScanning) {
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
             mScanning = false;

@@ -32,7 +32,7 @@ import java.util.TimerTask;
 /**
  * Activity for scanning and displaying available Bluetooth LE devices.
  */
-public class DeviceRingActivity extends Activity {
+public class DeviceMeterActivity extends Activity {
     private LeDeviceListAdapter mLeDeviceListAdapter;
     private BluetoothAdapter mBluetoothAdapter;
     private boolean mScanning;
@@ -157,7 +157,7 @@ public class DeviceRingActivity extends Activity {
         public LeDeviceListAdapter() {
             super();
             mLeDevices = new ArrayList<BluetoothDevice>();
-            mInflator = DeviceRingActivity.this.getLayoutInflater();
+            mInflator = DeviceMeterActivity.this.getLayoutInflater();
         }
 
         public void addDevice(BluetoothDevice device) {
@@ -242,8 +242,8 @@ public class DeviceRingActivity extends Activity {
                     {
                         Intent intent = new Intent();
                         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                        PendingIntent pIntent = PendingIntent.getActivity(DeviceRingActivity.this, 0, intent, 0);
-                        Notification noti = new Notification.Builder(DeviceRingActivity.this)
+                        PendingIntent pIntent = PendingIntent.getActivity(DeviceMeterActivity.this, 0, intent, 0);
+                        Notification noti = new Notification.Builder(DeviceMeterActivity.this)
                                 .setContentTitle("Device Not Close")
                                 .setContentText("Device Is Out Desired Range")
                                 .setDefaults(Notification.DEFAULT_SOUND)

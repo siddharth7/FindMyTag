@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/rohantiwari/tag/BluetoothLeService.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/rohantiwari/tag/BluetoothLeService.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/rohantiwari/tag/DeviceControlActivity.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/rohantiwari/tag/DeviceRingActivity.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/rohantiwari/tag/DeviceMeterActivity.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/rohantiwari/tag/DeviceScanActivity.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/rohantiwari/tag/RecyclerViewAdapter.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/rohantiwari/tag/RecyclerViewHolders.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/canada.jpg" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/defalut.png" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/germany.jpg" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_action_new.png" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_action_refresh.png" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/logo.jpg" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/needle1.png" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/newyork.jpg" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/speed1.png" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/sweden.jpg" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/uk.jpg" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/actionbar_indeterminate_progress.xml" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/card_view_list.xml" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/listitem_device.xml" charset="windows-1252" />
