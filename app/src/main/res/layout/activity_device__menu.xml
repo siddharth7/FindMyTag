@@ -16,30 +16,35 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
     <Button
-        android:layout_marginTop="100dp"
         android:id="@+id/find_device"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Find Device"
         android:layout_gravity="center_vertical"
         android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/protected_mode"
-        android:layout_alignStart="@+id/last_location" />
+        android:layout_alignStart="@+id/last_location"
+        android:layout_alignEnd="@+id/last_location"
+        android:background="@drawable/roundcorner"/>
     <Button
         android:id="@+id/protected_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Protected Mode"
         android:layout_gravity="center_vertical"
+        android:background="@drawable/roundcorner"
         android:layout_below="@+id/last_location"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignStart="@+id/last_location"
+        android:layout_marginTop="29dp"
+        android:layout_alignEnd="@+id/last_location" />
     <Button
         android:id="@+id/last_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Last Location"
         android:layout_gravity="center_vertical"
+        android:background="@drawable/roundcorner"
         android:layout_below="@+id/find_device"
-        android:layout_alignEnd="@+id/protected_mode"
-        android:layout_alignStart="@+id/protected_mode" />
+        android:layout_alignStart="@+id/device_image_menu"
+        android:layout_marginTop="27dp"
+        android:layout_alignEnd="@+id/device_image_menu" />
 </RelativeLayout>
