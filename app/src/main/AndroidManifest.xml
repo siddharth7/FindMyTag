@@ -49,6 +49,14 @@
             android:name=".Device_Menu"
             android:label="@string/title_activity_device__menu" >
         </activity>
+        <activity
+            android:name=".DeviceMeterActivity"
+            android:label="@string/title_activity_device__menu" >
+        </activity>
+        <activity
+            android:name=".DeviceNotificationActivity"
+            android:label="@string/title_activity_device__menu" >
+        </activity>
     </application>
 
 </manifest>
