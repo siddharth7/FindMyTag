@@ -2,26 +2,13 @@ package com.example.rohantiwari.tag;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 
-public class Device_Menu extends Activity implements View.OnClickListener {
+public class Device_Menu extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +36,20 @@ public class Device_Menu extends Activity implements View.OnClickListener {
 
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    public void onClick(View v) {
-        if(v.getId()== R.id.find_device){
-            Toast.makeText(getApplicationContext(), "Authentication error", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(getApplicationContext(), User_page.class);
+    public void onFindDeviceClick(View v)
+    {
+        if(v.getId() == R.id.find_device_meter)
+        {
+            Intent i = new Intent(Device_Menu.this,DeviceMeterActivity.class);
             startActivity(i);
         }
-
+    }
+    public void onProtectedModeClick(View v)
+    {
+        if(v.getId() == R.id.protected_mode_device)
+        {
+            Intent i = new Intent(Device_Menu.this,DeviceNotificationActivity.class);
+            startActivity(i);
+        }
     }
 }

@@ -2,6 +2,7 @@
 package com.example.rohantiwari.tag;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -16,12 +17,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,24 +33,21 @@ import java.util.TimerTask;
 /**
  * Activity for scanning and displaying available Bluetooth LE devices.
  */
-public class DeviceMeterActivity extends Activity {
+public class DeviceNotificationActivity extends ListActivity {
     private LeDeviceListAdapter mLeDeviceListAdapter;
     private BluetoothAdapter mBluetoothAdapter;
     private boolean mScanning;
     private Handler mHandler;
-    ImageView imageView;
     Timer myTimer;
 
-    private static final String TAG = "DeviceScanActivity";
+    private static final String TAG = "DeviceNotificationActivity";
     private static final int REQUEST_ENABLE_BT = 1;
     // Stops scanning after 10 seconds.
-    private static final long SCAN_PERIOD = 100;
+    private static final long SCAN_PERIOD = 1000;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.signal_meter);
-        imageView = (ImageView) findViewById(R.id.animatedImage);
         mHandler = new Handler();
         myTimer = new Timer();
         myTimer.schedule(new TimerTask() {
@@ -58,7 +56,7 @@ public class DeviceMeterActivity extends Activity {
                 TimerMethod();
             }
 
-        }, 0, SCAN_PERIOD);
+        }, 0, 2*SCAN_PERIOD);
 
         // Use this check to determine whether BLE is supported on the device.  Then you can
         // selectively disable BLE-related features.
@@ -90,7 +88,35 @@ public class DeviceMeterActivity extends Activity {
             scanLeDevice(true);
         }
     };
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        if (!mScanning) {
+            menu.findItem(R.id.menu_stop).setVisible(false);
+            menu.findItem(R.id.menu_scan).setVisible(true);
+            menu.findItem(R.id.menu_refresh).setActionView(null);
+        } else {
+            menu.findItem(R.id.menu_stop).setVisible(true);
+            menu.findItem(R.id.menu_scan).setVisible(false);
+            menu.findItem(R.id.menu_refresh).setActionView(
+                    R.layout.actionbar_indeterminate_progress);
+        }
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_scan:
+                mLeDeviceListAdapter.clear();
+                scanLeDevice(true);
+                break;
+            case R.id.menu_stop:
+                scanLeDevice(false);
+                break;
+        }
+        return true;
+    }
 
     @Override
     protected void onResume() {
@@ -107,6 +133,7 @@ public class DeviceMeterActivity extends Activity {
 
         // Initializes list view adapter.
         mLeDeviceListAdapter = new LeDeviceListAdapter();
+        setListAdapter(mLeDeviceListAdapter);
         scanLeDevice(true);
     }
 
@@ -123,8 +150,17 @@ public class DeviceMeterActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        scanLeDevice(false);
         mLeDeviceListAdapter.clear();
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        final BluetoothDevice device = mLeDeviceListAdapter.getDevice(position);
+        if (device == null) return;
+        if (mScanning) {
+            mBluetoothAdapter.stopLeScan(mLeScanCallback);
+            mScanning = false;
+        }
     }
 
     private void scanLeDevice(final boolean enable) {
@@ -156,7 +192,7 @@ public class DeviceMeterActivity extends Activity {
         public LeDeviceListAdapter() {
             super();
             mLeDevices = new ArrayList<BluetoothDevice>();
-            mInflator = DeviceMeterActivity.this.getLayoutInflater();
+            mInflator = DeviceNotificationActivity.this.getLayoutInflater();
         }
 
         public void addDevice(BluetoothDevice device) {
@@ -217,33 +253,17 @@ public class DeviceMeterActivity extends Activity {
     // Device scan callback.
     protected BluetoothAdapter.LeScanCallback mLeScanCallback =
             new BluetoothAdapter.LeScanCallback() {
-                float initialDegree = 0f;
-                float currentDegree;
+
                 @Override
                 public void onLeScan(final BluetoothDevice device, final int rssi, byte[] scanRecord) {
-                    currentDegree = -rssi * 3f;
-                    RotateAnimation rotateAnimation = new RotateAnimation(
-                            initialDegree,
-                            -currentDegree,
-                            Animation.RELATIVE_TO_SELF, 0.5f,
-                            Animation.RELATIVE_TO_SELF,
-                            0.5f);
 
-                    rotateAnimation.setDuration(100);
-
-                    rotateAnimation.setFillAfter(true);
-
-                    imageView.startAnimation(rotateAnimation);
-                    initialDegree = -currentDegree;
-
-
-                    if( rssi < -100) //&& device.getAddress().equals(StatusAdapter.deviceAddress))
+                    if( rssi < -90 )
                     {
                         Intent intent = new Intent();
                         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                        PendingIntent pIntent = PendingIntent.getActivity(DeviceMeterActivity.this, 0, intent, 0);
-                        Notification noti = new Notification.Builder(DeviceMeterActivity.this)
-                                .setContentTitle("Device Not Close")
+                        PendingIntent pIntent = PendingIntent.getActivity(DeviceNotificationActivity.this, 0, intent, 0);
+                        Notification noti = new Notification.Builder(DeviceNotificationActivity.this)
+                                .setContentTitle("Device Stolen")
                                 .setContentText("Device Is Out Desired Range")
                                 .setDefaults(Notification.DEFAULT_SOUND)
                                 .setSmallIcon(R.mipmap.ic_launcher)
