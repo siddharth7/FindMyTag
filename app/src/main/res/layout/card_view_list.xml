@@ -1,46 +1,44 @@
 <android.support.v7.widget.CardView
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/card_view"
+xmlns:card_view="http://schemas.android.com/apk/res-auto"
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/card_view"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+card_view:cardUseCompatPadding="true"
+card_view:cardCornerRadius="8dp"
+android:layout_marginBottom="16dp">
+
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    card_view:cardUseCompatPadding="true"
-    card_view:cardCornerRadius="8dp"
-    android:layout_marginBottom="16dp">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ImageView
+        android:id="@+id/device_photo"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:contentDescription="@string/action_settings"
+        android:src="@drawable/defalut"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_toRightOf="@id/device_photo"
+        android:id="@+id/item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="@string/object_name"/>
+    <TextView
+        android:id="@+id/object_address"
+        android:layout_toRightOf="@id/device_photo"
+        android:layout_below="@id/item_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="@string/object_name"
+        android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/device_photo"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:contentDescription="@string/action_settings"
-            android:src="@drawable/defalut"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"/>
-
-        <TextView
-            android:layout_toRightOf="@id/device_photo"
-            android:id="@+id/item_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:textColor="@color/abc_primary_text_material_light"
-            android:text="@string/object_name"/>
-        <TextView
-            android:id="@+id/object_address"
-            android:layout_toRightOf="@id/device_photo"
-            android:layout_below="@id/item_name"
-            android:layout_width="match_parent"
-            android:textColor="@color/abc_primary_text_material_light"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="@string/object_name"
-            android:textStyle="bold" />
-
-    </RelativeLayout>
+</RelativeLayout>
 
 </android.support.v7.widget.CardView>

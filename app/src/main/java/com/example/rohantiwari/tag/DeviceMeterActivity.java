@@ -32,7 +32,7 @@ import java.util.TimerTask;
 /**
  * Activity for scanning and displaying available Bluetooth LE devices.
  */
-public class DeviceRingActivity extends Activity {
+public class DeviceMeterActivity extends Activity {
     private LeDeviceListAdapter mLeDeviceListAdapter;
     private BluetoothAdapter mBluetoothAdapter;
     private boolean mScanning;
@@ -43,13 +43,12 @@ public class DeviceRingActivity extends Activity {
     private static final String TAG = "DeviceScanActivity";
     private static final int REQUEST_ENABLE_BT = 1;
     // Stops scanning after 10 seconds.
-    private static final long SCAN_PERIOD = 200;
+    private static final long SCAN_PERIOD = 100;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signal_meter);
-        getActionBar().setTitle(R.string.title_devices);
         imageView = (ImageView) findViewById(R.id.animatedImage);
         mHandler = new Handler();
         myTimer = new Timer();
@@ -59,7 +58,7 @@ public class DeviceRingActivity extends Activity {
                 TimerMethod();
             }
 
-        }, 0, SCAN_PERIOD + 200);
+        }, 0, SCAN_PERIOD);
 
         // Use this check to determine whether BLE is supported on the device.  Then you can
         // selectively disable BLE-related features.
@@ -157,7 +156,7 @@ public class DeviceRingActivity extends Activity {
         public LeDeviceListAdapter() {
             super();
             mLeDevices = new ArrayList<BluetoothDevice>();
-            mInflator = DeviceRingActivity.this.getLayoutInflater();
+            mInflator = DeviceMeterActivity.this.getLayoutInflater();
         }
 
         public void addDevice(BluetoothDevice device) {
@@ -242,8 +241,8 @@ public class DeviceRingActivity extends Activity {
                     {
                         Intent intent = new Intent();
                         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                        PendingIntent pIntent = PendingIntent.getActivity(DeviceRingActivity.this, 0, intent, 0);
-                        Notification noti = new Notification.Builder(DeviceRingActivity.this)
+                        PendingIntent pIntent = PendingIntent.getActivity(DeviceMeterActivity.this, 0, intent, 0);
+                        Notification noti = new Notification.Builder(DeviceMeterActivity.this)
                                 .setContentTitle("Device Not Close")
                                 .setContentText("Device Is Out Desired Range")
                                 .setDefaults(Notification.DEFAULT_SOUND)

@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -6,8 +6,9 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.rohantiwari.tag.Device_Menu"
     android:weightSum="1">
-
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ImageView
         android:layout_width="220dp"
         android:layout_height="220dp"
@@ -16,7 +17,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
     <Button
-        android:id="@+id/find_device"
+        android:layout_below="@id/device_image_menu"
+        android:id="@+id/find_device_meter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Find Device"
@@ -24,9 +26,10 @@
         android:layout_centerVertical="true"
         android:layout_alignStart="@+id/last_location"
         android:layout_alignEnd="@+id/last_location"
-        android:background="@drawable/roundcorner"/>
+        android:background="@drawable/roundcorner"
+        android:onClick="onFindDeviceClick" />
     <Button
-        android:id="@+id/protected_mode"
+        android:id="@+id/protected_mode_device"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Protected Mode"
@@ -35,7 +38,8 @@
         android:layout_below="@+id/last_location"
         android:layout_alignStart="@+id/last_location"
         android:layout_marginTop="29dp"
-        android:layout_alignEnd="@+id/last_location" />
+        android:layout_alignEnd="@+id/last_location"
+        android:onClick="onProtectedModeClick" />
     <Button
         android:id="@+id/last_location"
         android:layout_width="wrap_content"
@@ -43,8 +47,9 @@
         android:text="Last Location"
         android:layout_gravity="center_vertical"
         android:background="@drawable/roundcorner"
-        android:layout_below="@+id/find_device"
+        android:layout_below="@+id/find_device_meter"
         android:layout_alignStart="@+id/device_image_menu"
         android:layout_marginTop="27dp"
         android:layout_alignEnd="@+id/device_image_menu" />
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>
