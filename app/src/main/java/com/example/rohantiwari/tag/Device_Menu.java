@@ -52,4 +52,12 @@ public class Device_Menu extends Activity {
             startActivity(i);
         }
     }
+    public void onLastLocationClick(View v)
+    {
+        if(v.getId() == R.id.last_location)
+        {
+            Intent i = new Intent(Device_Menu.this,LastLocation.class);
+            startActivity(i);
+        }
+    }
 }

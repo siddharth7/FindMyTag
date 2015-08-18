@@ -50,6 +50,7 @@
         android:layout_below="@+id/find_device_meter"
         android:layout_alignStart="@+id/device_image_menu"
         android:layout_marginTop="27dp"
-        android:layout_alignEnd="@+id/device_image_menu" />
+        android:layout_alignEnd="@+id/device_image_menu"
+        android:onClick="onLastLocationClick"/>
     </RelativeLayout>
 </ScrollView>
