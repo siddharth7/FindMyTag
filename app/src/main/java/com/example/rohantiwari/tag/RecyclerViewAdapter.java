@@ -18,17 +18,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         this.context = context;
     }
 
+//
+//    public RecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
+//
+//        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_list, parent, null);
+//        RecyclerViewHolders rcv = new RecyclerViewHolders(layoutView);
+//        return rcv;
+//    }
     @Override
-    public RecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewHolders onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View itemView = LayoutInflater.
+                from(viewGroup.getContext()).
+                inflate(R.layout.card_view_list, viewGroup, false);
 
-        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_list, null);
-        RecyclerViewHolders rcv = new RecyclerViewHolders(layoutView);
-        return rcv;
+        return new RecyclerViewHolders(itemView);
     }
 
     @Override
     public void onBindViewHolder(RecyclerViewHolders holder, int position) {
-        holder.countryName.setText(itemList.get(position).getName());
+        holder.objectName.setText(itemList.get(position).getName());
+        holder.objectAddress.setText(itemList.get(position).getAddr());
     }
 
     @Override

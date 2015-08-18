@@ -61,7 +61,7 @@ public class Login extends Activity implements View.OnClickListener {
 //                ProgressDialog dialog = new ProgressDialog(Login.this);
 //                dialog.setMessage("Authenticating..");
 //                dialog.show();
-                new HttpAsyncTask().execute("http://192.168.56.74:8000/token/new.json");
+                new HttpAsyncTask().execute("http://192.168.56.74:8001/token/new.json");
 
 //                Log.d("final result of login", success_login);
 //                if(success_login=="true") {
@@ -134,6 +134,8 @@ public class Login extends Activity implements View.OnClickListener {
                 Log.d("token received",result);
                 if(success_login=="true") {
                     Intent i = new Intent(getApplicationContext(), User_page.class);
+                    i.putExtra("username", mEmailLogin.getText().toString());
+                    i.putExtra("password", mPasswordLogin.getText().toString());
                     startActivity(i);
                     finish();
                 }
