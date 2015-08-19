@@ -28,6 +28,7 @@ android:layout_marginBottom="16dp">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
+        android:textColor="@color/abc_primary_text_disable_only_material_light"
         android:text="@string/object_name"/>
     <TextView
         android:id="@+id/object_address"
@@ -36,6 +37,7 @@ android:layout_marginBottom="16dp">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
+        android:textColor="@color/abc_primary_text_disable_only_material_light"
         android:text="@string/object_name"
         android:textStyle="bold" />
 

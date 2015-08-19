@@ -23,7 +23,11 @@
     <string name="title_devices">BLE Device Scan</string>
     <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
     <string name="title_activity_device__menu">Device_Menu</string>
+    <string name="devicename">DeviceName</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_last_loaction">Map</string>
+    <string name="title_activity_add_device">AddDevice</string>
 </resources>
