@@ -44,46 +44,46 @@ public class SignUp extends Activity implements View.OnClickListener{
         signup=(Button)findViewById(R.id.btnCreate_acc);
         signup.setOnClickListener(this);
     }
-    public String POST(String url, String name, String password, String email ){
-        InputStream inputStream = null;
-        try {
+        public String POST(String url, String name, String password, String email ){
+            InputStream inputStream = null;
+            try {
 
-            HttpClient httpclient = new DefaultHttpClient();
+                HttpClient httpclient = new DefaultHttpClient();
 
-            HttpPost httpPost = new HttpPost(url);
+                HttpPost httpPost = new HttpPost(url);
 
-            String json = "";
+                String json = "";
 
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("username",name);
-            jsonObject.put("password", password);
-            jsonObject.put("email", email);
-            Log.d("json obj", String.valueOf(jsonObject));
-            json = jsonObject.toString();
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("username",name);
+                jsonObject.put("password", password);
+                jsonObject.put("email", email);
+                Log.d("json obj", String.valueOf(jsonObject));
+                json = jsonObject.toString();
 
-            StringEntity se = new StringEntity(json);
+                StringEntity se = new StringEntity(json);
 
-            httpPost.setEntity(se);
+                httpPost.setEntity(se);
 
-            httpPost.setHeader("Content-type", "application/json");
+                httpPost.setHeader("Content-type", "application/json");
 
-            HttpResponse httpResponse = httpclient.execute(httpPost);
+                HttpResponse httpResponse = httpclient.execute(httpPost);
 
-            inputStream = httpResponse.getEntity().getContent();
+                inputStream = httpResponse.getEntity().getContent();
 
-            if(inputStream != null)
-                result = convertInputStreamToString(inputStream);
-            else
-                result = "Did not work!";
+                if(inputStream != null)
+                    result = convertInputStreamToString(inputStream);
+                else
+                    result = "Did not work!";
 
-        } catch (Exception e) {
-            Log.d("InputStream", e.getLocalizedMessage());
+            } catch (Exception e) {
+                Log.d("InputStream", e.getLocalizedMessage());
+            }
+
+            // 11. return result
+            Log.d("final result", result);
+            return result;
         }
-
-        // 11. return result
-        Log.d("final result", result);
-        return result;
-    }
 
     public boolean isConnected(){
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
@@ -98,10 +98,9 @@ public class SignUp extends Activity implements View.OnClickListener{
 
         switch(view.getId()){
             case R.id.btnCreate_acc:
-                if(validate()) {
+
                     // call AsynTask to perform network operation on separate thread
-                    new HttpAsyncTask().execute("http://192.168.56.74:8000/users/");
-                }
+                    new HttpAsyncTask().execute("http://192.168.56.74:8001/users/");
                 break;
         }
 

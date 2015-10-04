@@ -1,30 +1,24 @@
-
 package com.example.rohantiwari.tag;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.ListActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AlertDialog;
-import android.text.InputType;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,16 +33,22 @@ public class DeviceScanActivity extends ListActivity {
     private BluetoothAdapter mBluetoothAdapter;
     private boolean mScanning;
     private Handler mHandler;
-    private String DeviceAddress;//Device Address Add this to server
-    private String m_Text;//Device Name Add this to server
+    private String DeviceAddress="abc";//Device Address Add this to server
+    private String m_Text="def";//Device Name Add this to server
     private static final String TAG = "DeviceScanActivity";
+    static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_ENABLE_BT = 1;
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000;
+    public String username="";
+    public String password="";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle extras = getIntent().getExtras();
+        username=extras.getString("username");
+        password=extras.getString("password");
         mHandler = new Handler();
 
         // Use this check to determine whether BLE is supported on the device.  Then you can
@@ -70,6 +70,8 @@ public class DeviceScanActivity extends ListActivity {
             finish();
             return;
         }
+//        Log.d("Device mac", DeviceAddress);
+//        Log.d("Device name",m_Text);
     }
 
     @Override
@@ -128,6 +130,10 @@ public class DeviceScanActivity extends ListActivity {
             finish();
             return;
         }
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -142,41 +148,27 @@ public class DeviceScanActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id){
         final BluetoothDevice device = mLeDeviceListAdapter.getDevice(position);
         if (device == null) return;
-        // custom dialog
-            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setMessage("Add Device Name");
-            alertDialog.setTitle("Add");
-            alertDialog.setCancelable(true);
-            final EditText input = new EditText(this);
-            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            input.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
-            alertDialog.setView(input);
-            alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+        DeviceAddress = device.getAddress();
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(), "Cancel", Toast.LENGTH_SHORT).show();
-                    dialog.cancel();
-                }
-            });
-            alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Add", new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    m_Text = input.getText().toString();
-                    Toast.makeText(getApplicationContext(), "Now Add a picture of the item", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                    startActivityForResult(intent, 0);
-                }
-            });
-
-            alertDialog.show();
-            DeviceAddress = device.getAddress();
-
+//        Log.d("Device mac",DeviceAddress);
+//        Log.d("Device name",m_Text);
 
         if (mScanning) {
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
+            Log.d("got item", "ok");
+            Intent i= new Intent(DeviceScanActivity.this,addDevice.class);
+            i.putExtra("device_mac", DeviceAddress);
+            i.putExtra("username",username);
+            i.putExtra("password", password);
+            startActivity(i);
             mScanning = false;
+        }
+
+    }
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
 
@@ -270,17 +262,17 @@ public class DeviceScanActivity extends ListActivity {
     private BluetoothAdapter.LeScanCallback mLeScanCallback =
             new BluetoothAdapter.LeScanCallback() {
 
-        @Override
-        public void onLeScan(final BluetoothDevice device, final int rssi, byte[] scanRecord) {
-            runOnUiThread(new Runnable() {
                 @Override
-                public void run() {
-                    mLeDeviceListAdapter.addDevice(device);
-                    mLeDeviceListAdapter.notifyDataSetChanged();
+                public void onLeScan(final BluetoothDevice device, final int rssi, byte[] scanRecord) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mLeDeviceListAdapter.addDevice(device);
+                            mLeDeviceListAdapter.notifyDataSetChanged();
+                        }
+                    });
                 }
-            });
-        }
-    };
+            };
 
     static class ViewHolder {
         TextView deviceName;

@@ -1,10 +1,10 @@
 package com.example.rohantiwari.tag;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 
-public class User_page extends Activity {
+public class User_page extends ActionBarActivity {
 
     private LinearLayoutManager lLayout;
     public JSONArray json;
@@ -53,6 +53,7 @@ public class User_page extends Activity {
         Bundle extras = getIntent().getExtras();
         username=extras.getString("username");
         password=extras.getString("password");
+
 //        Toolbar topToolBar = (Toolbar)findViewById(R.id.toolbar);
 //        setSupportActionBar(topToolBar);
 
@@ -107,6 +108,8 @@ public class User_page extends Activity {
         }
         if(id == R.id.action_new){
             Intent i = new Intent(User_page.this,DeviceScanActivity.class);
+            i.putExtra("username",username);
+            i.putExtra("password", password);
             startActivity(i);
         }
 
@@ -127,11 +130,8 @@ public class User_page extends Activity {
         }
         for(int i = 0; i < num; i++) {
             JSONObject obj= jsonarr.getJSONObject(i);
-            //Log.d("obj1",obj.get("device_mac").toString());
-            //Log.d("obj2",obj.get("device_name").toString());
             Log.d("obje", String.valueOf(obj));
             allItems.add(new ItemObject(obj.get("device_mac").toString(),obj.get("device_name").toString()));
-            //allItems.add(new ItemObject("as", "to"));
         }
 
         return allItems;

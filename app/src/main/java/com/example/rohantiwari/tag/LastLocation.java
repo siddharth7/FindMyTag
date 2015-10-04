@@ -67,13 +67,13 @@ public class LastLocation extends FragmentActivity {
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         //String Device Name
-        String DeviceName = "Device";
+        String DeviceName = "Keys";
 
         // Get latitude of the Database
-        double latitude=28.613939;
+        double latitude=28.544606;
 
         // Get longitude of the Database
-        double longitude = 77.209021;
+        double longitude = 77.272557;
 
         // Create a LatLng object for the current location
         LatLng latLng = new LatLng(latitude, longitude);
@@ -82,7 +82,7 @@ public class LastLocation extends FragmentActivity {
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
         // Zoom in the Google Map
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(18));
         mMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).title(DeviceName).snippet("Device Last Known Location"));
     }
 }

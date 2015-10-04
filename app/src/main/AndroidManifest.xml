@@ -36,7 +36,7 @@
         <uses-permission android:name="android.permission.INTERNET" />
         <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Login"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,15 +49,15 @@
             android:label="@string/title_activity_sign_up"
             android:theme="@style/AppThemeSignUp" >
         </activity>
-        <activity
-            android:name=".Login"
-            android:label="@string/title_activity_login"
-            android:theme="@style/AppThemeSignUp" >
-        </activity>
+        <!--<activity-->
+            <!--android:name=".Login"-->
+            <!--android:label="@string/title_activity_login"-->
+            <!--android:theme="@style/AppThemeSignUp" >-->
+        <!--</activity>-->
         <activity
             android:name=".User_page"
             android:label="UserPage"
-            android:theme="@style/AppThemeSignUp" >
+            android:theme="@style/AppThemeUserActivity" >
         </activity>
         <activity
             android:name=".DeviceScanActivity"
@@ -87,6 +87,10 @@
         <activity
             android:name=".LastLocation"
             android:label="@string/title_activity_last_loaction" >
+        </activity>
+        <activity
+            android:name=".addDevice"
+            android:label="Add Device" >
         </activity>
     </application>
 

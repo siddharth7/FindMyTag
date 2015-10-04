@@ -16,7 +16,8 @@ public class ItemObject {
 
         return name;
     }
-    public String getAddr(){
+    public String getAddr()
+    {
         return addr;
     }
 
@@ -24,7 +25,8 @@ public class ItemObject {
 
         this.name = name;
     }
-    public void setAddr(String addr){
+    public void setAddr(String addr)
+    {
         this.addr=addr;
     }
 }

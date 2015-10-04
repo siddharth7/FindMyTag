@@ -51,7 +51,13 @@ public class Login extends Activity implements View.OnClickListener {
         mLoginbtn = (Button) findViewById(R.id.btn_login);
         _signupLink = (TextView) findViewById(R.id.link_login);
         mLoginbtn.setOnClickListener(this);
+        _signupLink=(TextView)findViewById(R.id.link_login);
 
+    }
+    public void signlink(View v)
+    {
+        Intent i= new Intent(Login.this, SignUp.class);
+        startActivity(i);
     }
     @Override
     public void onClick(View v) {
@@ -62,19 +68,8 @@ public class Login extends Activity implements View.OnClickListener {
 //                dialog.setMessage("Authenticating..");
 //                dialog.show();
                 new HttpAsyncTask().execute("http://192.168.56.74:8001/token/new.json");
+                break;
 
-//                Log.d("final result of login", success_login);
-//                if(success_login=="true") {
-//                    Intent i = new Intent(Login.this, User_page.class);
-//                    startActivity(i);
-//                    finish();
-//                }
-//                else
-//                {
-//                    Toast.makeText(getApplicationContext(),"Authentication error",Toast.LENGTH_SHORT).show();
-//                }
-//
-//                break;
 
         }
     }
@@ -124,7 +119,7 @@ public class Login extends Activity implements View.OnClickListener {
         @Override
         protected void onPostExecute(String result) {
             dialog.dismiss();
-            Toast.makeText(getBaseContext(), "Data Sent!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getBaseContext(), "Data Sent!", Toast.LENGTH_LONG).show();
             try {
                 json = new JSONObject(result);
 //                JSONObject json_LL = json.getJSONObject("LL");
