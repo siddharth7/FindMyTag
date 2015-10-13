@@ -100,7 +100,7 @@ public class SignUp extends Activity implements View.OnClickListener{
             case R.id.btnCreate_acc:
 
                     // call AsynTask to perform network operation on separate thread
-                    new HttpAsyncTask().execute("http://192.168.56.74:8001/users/");
+                    new HttpAsyncTask().execute("http://128.199.83.48/users/");
                 break;
         }
 

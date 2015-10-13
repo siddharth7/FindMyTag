@@ -58,7 +58,7 @@ public class User_page extends ActionBarActivity {
 //        setSupportActionBar(topToolBar);
 
         HttpAsyncTask httpt=new HttpAsyncTask();
-        httpt.execute("http://192.168.56.74:8001/devices/new.json");
+        httpt.execute("http://128.199.83.48/devices/new.json");
         try {
             rese=httpt.get().toString();
             jsonarr= new JSONArray(rese);

@@ -67,7 +67,7 @@ public class Login extends Activity implements View.OnClickListener {
 //                ProgressDialog dialog = new ProgressDialog(Login.this);
 //                dialog.setMessage("Authenticating..");
 //                dialog.show();
-                new HttpAsyncTask().execute("http://192.168.56.74:8001/token/new.json");
+                new HttpAsyncTask().execute("http://128.199.83.48/token/new.json");
                 break;
 
 
